@@ -17,24 +17,56 @@ class App extends Component {
   // https://medium.freecodecamp.org/the-best-way-to-bind-event-handlers-in-react-282db2cf1530
   // you could do switchNameHandler() {...} but the you would need to
   // write in the constructor this.switchNameHandler = this.switchNameHandler.bind(this);
-  switchNameHandler = () => {
+  switchNameHandler = (newName) => {
     this.setState({
       person_list: [
-        { name: 'Mark Richard', age: 46 },
+        { name: newName, age: 46 },
         { name: 'Maria Cristina', age: 32 },
         { name: 'Francesco Shaun', age: 1.5 }
       ]
     });
   };
   
+  nameChangedHandler = (event) => {
+    this.setState({
+      person_list: [
+        { name: 'Mark Richard', age: 46 },
+        { name: event.target.value, age: 32 },
+        { name: 'Francesco Shaun', age: 1.5 }
+      ]
+    });
+  };
+  
   render() {
+    const buttonStyle = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    };
     return (
       <div className="App">
         <h1>Hi, I am a Ferguson React App </h1>
-        <button onClick={this.switchNameHandler}>Switch Name</button>
-        <Person name={this.state.person_list[0].name} age={this.state.person_list[0].age}/>
-        <Person name={this.state.person_list[1].name} age={this.state.person_list[1].age}>My Hobbies: Watching sport</Person>
-        <Person name={this.state.person_list[2].name} age={this.state.person_list[2].age}>My Hobbies: Drawing</Person>
+        <button
+        style={buttonStyle}
+          onClick={this.switchNameHandler.bind(this, 'Mark Richard')}>Switch Name</button>
+        <Person
+          name={this.state.person_list[0].name}
+          age={this.state.person_list[0].age}
+        />
+        <Person
+          name={this.state.person_list[1].name}
+          age={this.state.person_list[1].age}
+          click={this.switchNameHandler.bind(this, 'Mark Richard')}
+          change={this.nameChangedHandler}>
+          My Hobbies: Watching sport
+        </Person>
+        <Person
+          name={this.state.person_list[2].name}
+          age={this.state.person_list[2].age}>
+          My Hobbies: Drawing
+        </Person>
       </div>
     );
   }
