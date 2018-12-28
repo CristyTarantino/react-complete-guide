@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './FamilyApp.module.scss';
 import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class FamilyApp extends Component {
   constructor(props) {
@@ -50,13 +51,14 @@ class FamilyApp extends Component {
       persons = (
         <div>
           {this.state.person_list.map((person, index) => {
-            return <Person
+            return <ErrorBoundary
               key={person.id}
+            ><Person
               click={() => this.deletePersonHandler(index)} // or click={this.deletePersonHandler.bind(this, index)}
               name={person.name}
               age={person.age}
               changed={(event) => this.nameChangedHandler(event, person.id)}
-            />
+            /></ErrorBoundary>
           })}
         </div>
       );
