@@ -23,7 +23,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "node-sass": "^4.11.0",
-    "radium": "^0.25.1"
+    "node-sass": "^4.11.0"
   }
 }

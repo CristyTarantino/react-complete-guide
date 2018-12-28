@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styles from './App.module.scss';
 import Person from './Person/Person';
 
-class App extends Component {
+class FamilyApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,6 +42,7 @@ class App extends Component {
   };
   
   render() {
+    const classes = [];
     let persons = null;
     let btnClass = null;
     
@@ -63,9 +64,7 @@ class App extends Component {
       btnClass = styles.red;
     }
     
-    const classes = [];
-    
-    if (this.state.person_list.length <=2) {
+    if (this.state.person_list.length <= 2) {
       classes.push(styles.red);
     }
     
@@ -88,4 +87,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default FamilyApp;
