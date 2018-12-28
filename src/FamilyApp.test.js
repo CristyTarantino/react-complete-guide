@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './FamilyApp';
+import FamilyApp from './FamilyApp';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
+  ReactDOM.render(<FamilyApp />, div);
   ReactDOM.unmountComponentAtNode(div);
 });

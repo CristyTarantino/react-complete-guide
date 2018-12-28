@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from './App.module.scss';
+import styles from './FamilyApp.module.scss';
 import Person from './Person/Person';
 
 class FamilyApp extends Component {
