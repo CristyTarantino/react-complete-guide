@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import './App.scss';
-
-import Radium, { StyleRoot } from 'radium';
+import styles from './App.module.scss';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -44,20 +42,8 @@ class App extends Component {
   };
   
   render() {
-    const buttonStyle = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
-    };
-    
     let persons = null;
+    let btnClass = null;
     
     if ( this.state.showPersons ) {
       persons = (
@@ -73,39 +59,33 @@ class App extends Component {
           })}
         </div>
       );
-      
-      buttonStyle.backgroundColor = 'red';
-      buttonStyle[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      };
+  
+      btnClass = styles.red;
     }
     
     const classes = [];
     
     if (this.state.person_list.length <=2) {
-      classes.push('red');                    // classes = ['red']
+      classes.push(styles.red);
     }
     
     if (this.state.person_list.length <= 1) {
-      classes.push('bold');                   // classes = ['red', 'bold']
+      classes.push(styles.bold);
     }
     
     return (
-      <StyleRoot>
-        <div className="App">
+        <div className={styles.App}>
           <h1>Hi, I am a Ferguson React App </h1>
           <p className={classes.join(' ')}>This is a great family</p>
           <button
-            style={buttonStyle}
+            className={btnClass}
             onClick={this.togglePersonsHandler}>
             Toggle Persons
           </button>
           {persons}
         </div>
-      </StyleRoot>
     );
   }
 }
 
-export default Radium(App);
+export default App;
