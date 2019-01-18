@@ -3,10 +3,10 @@ import styles from "./Cockpit.module.scss";
 
 const cockpit = (props) => {
   const classes = [];
-  let btnClass = null;
+  let btnClass = styles.button;
   
   if ( props.showPersonList ) {
-    btnClass = styles.red;
+    btnClass = [styles.button, styles.red].join(' ');
   }
   
   if (props.personList.length <= 2) {
@@ -18,7 +18,8 @@ const cockpit = (props) => {
   }
   
   return (
-    <div className={styles.Cockpit}>
+    //fragment component does what Aux do
+    <>
       <h1>{props.appTitle}</h1>
       <p className={classes.join(' ')}>This is a great family</p>
       <button
@@ -26,7 +27,7 @@ const cockpit = (props) => {
         onClick={props.clicked}>
         Toggle Persons
       </button>
-    </div>
+    </>
   );
 };
 

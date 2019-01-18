@@ -1,9 +1,13 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styles from './App.module.scss';
+
+// import WithClass from '../hoc/WithClass';
+import newWithClass from '../hoc/NewWithClass';
+
 import PersonList from '../components/PersonList/PersonList';
 import Cockpit from '../components/Cockpit/Cockpit';
 
-class App extends Component {
+class App extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,6 +17,35 @@ class App extends Component {
         { name: 'Francesco', age: 1.5, id: '2'}
       ]
     };
+  
+    console.log('[App.js] Inside Constructor', props);
+  }
+  
+  componentWillMount() {
+    console.log('[App.js] Inside componentWillMount');
+  }
+  
+  componentDidMount() {
+    console.log('[App.js] Inside componentDidMount');
+  }
+  
+  componentWillReceiveProps(nextProps, nextContext) {
+    console.log('[UPDATE App.js] Inside componentWillReceiveProps', nextProps, nextContext);
+  }
+  
+  // the one below is if you inherit from Component
+  // shouldComponentUpdate(nextProps, nextState, nextContext) {
+  //   console.log('[UPDATE App.js] Inside shouldComponentUpdate', nextProps, nextState, nextContext);
+  //   return nextState.personList !== this.state.personList ||
+  //     nextState.showPersonList !== this.state.showPersonList;
+  // }
+  
+  componentWillUpdate(nextProps, nextState, nextContext) {
+    console.log('[UPDATE App.js] Inside componentWillUpdate', nextProps, nextState, nextContext);
+  }
+  
+  componentDidUpdate() {
+    console.log('[UPDATE App.js] Inside componentDidUpdate');
   }
   
   deletePersonHandler = (personIndex) => {
@@ -44,6 +77,7 @@ class App extends Component {
   
   render() {
     let persons = null;
+    console.log('[App.js] Inside render');
     
     if ( this.state.showPersonList ) {
       persons =
@@ -55,7 +89,8 @@ class App extends Component {
     }
     
     return (
-        <div className={styles.App}>
+        /*<WithClass classes={styles.App}>*/
+        <>
           <Cockpit
             appTitle={this.props.title}
             personList = {this.state.personList}
@@ -63,9 +98,10 @@ class App extends Component {
             clicked={this.togglePersonListHandler}
           />
           {persons}
-        </div>
+          </>
+        // </WithClass>
     );
   }
 }
 
-export default App;
+export default newWithClass(App, styles.App);
