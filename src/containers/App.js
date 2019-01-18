@@ -12,10 +12,11 @@ class App extends PureComponent {
     super(props);
     this.state = {
       personList: [
-        { name: 'Mark', age: 46, id: '0' },
+        { name: 'Mark', age: "46", id: '0' },
         { name: 'Cristina', age: 32, id: '1'},
         { name: 'Francesco', age: 1.5, id: '2'}
-      ]
+      ],
+      toggleClicked: 0
     };
   
     console.log('[App.js] Inside Constructor', props);
@@ -72,7 +73,16 @@ class App extends PureComponent {
   // write in the constructor this.togglePersonListHandler = this.switchNameHandler.bind(this);
   togglePersonListHandler = () => {
     const doesShow = this.state.showPersonList;
-    this.setState({showPersonList: !doesShow});
+    
+    // setState runs asynchronously so you might not get the right toggleClicked
+    // if at the same time in some other place setState is being called
+    // therefore is safer to call set state with a callback
+    this.setState((previousState, props) => {
+      return {
+        showPersonList: !doesShow,
+        toggleClicked: previousState.toggleClicked + 1
+      }
+    });
   };
   
   render() {
