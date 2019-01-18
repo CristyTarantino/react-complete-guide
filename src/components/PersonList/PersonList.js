@@ -5,6 +5,7 @@ class PersonList extends PureComponent {
   constructor(props) {
     super(props);
     console.log('[PersonList.js] Inside Constructor', props);
+    this.lastPersonRef = React.createRef();
   }
   
   componentWillMount() {
@@ -13,6 +14,8 @@ class PersonList extends PureComponent {
   
   componentDidMount() {
     console.log('[PersonList.js] Inside componentDidMount');
+    // if I want to interact with child input
+    // this.lastPersonRef.current.focusInput();
   }
   
   componentWillReceiveProps(nextProps, nextContext) {
@@ -38,9 +41,11 @@ class PersonList extends PureComponent {
     return this.props.personList.map((person, index) => {
       return <Person
         key={person.id}
+        position={index}
         click={() => this.props.clicked(index)}
         name={person.name}
         age={person.age}
+        ref={this.lastPersonRef}
         changed={(event) => this.props.changed(event, person.id)}
       />
     });
