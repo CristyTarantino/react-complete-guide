@@ -36,6 +36,18 @@ class App extends PureComponent {
     console.log('[UPDATE App.js] Inside componentWillReceiveProps', nextProps, nextContext);
   }
   
+  // for component that needs to get props and state in sync
+  static getDerivedStateFromProps(nextProps, prevProps) {
+    console.log('[UPDATE App.js] Inside getDerivedStateFromProps', nextProps, prevProps);
+    
+    return nextProps;
+  }
+  
+  // get snapshot of your dom right before is about to change
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    console.log('[UPDATE App.js] Inside getSnapshotBeforeUpdate', prevProps, prevState);
+  }
+  
   // the one below is if you inherit from Component
   // shouldComponentUpdate(nextProps, nextState, nextContext) {
   //   console.log('[UPDATE App.js] Inside shouldComponentUpdate', nextProps, nextState, nextContext);
