@@ -4,9 +4,11 @@ import PropTypes from 'prop-types';
 import styles from './Person.module.scss';
 
 import WithClass from '../../../hoc/WithClass';
-import { AuthContext} from "../../../containers/App";
+import AuthContext from '../../../AuthContext';
 
 class Person extends Component {
+  static contextType = AuthContext;
+  
   constructor(props){
     super(props);
     this.inputElement = React.createRef();
@@ -27,9 +29,7 @@ class Person extends Component {
   render() {
     return (
       <WithClass classes={styles.Person}>
-        <AuthContext.Consumer >
-          {auth => auth ? <p>I'm authenticated</p> : null}
-        </AuthContext.Consumer>
+        { this.context.isAuth ? 'I\'m authenticated' : 'I am not authenticated' }
         <p onClick={this.props.click}>My name is {this.props.name} and I am {this.props.age} year old!</p>
         <p>{this.props.children}</p>
         <input

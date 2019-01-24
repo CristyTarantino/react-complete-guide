@@ -1,26 +1,24 @@
 import React, { PureComponent } from 'react';
 import styles from './App.module.scss';
 
-// import WithClass from '../hoc/WithClass';
 import newWithClass from '../hoc/NewWithClass';
 
 import PersonList from '../components/PersonList/PersonList';
 import Cockpit from '../components/Cockpit/Cockpit';
 
-// for global settings
-export const AuthContext = React.createContext(false);
+import AuthContext from '../AuthContext'
 
 class App extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       personList: [
-        { name: 'Mark', age: "46", id: '0' },
+        { name: 'Mark', age: 46, id: '0' },
         { name: 'Cristina', age: 32, id: '1'},
         { name: 'Francesco', age: 1.5, id: '2'}
       ],
       toggleClicked: 0,
-      authenticated: false
+      isAuth: false
     };
   
     console.log('[App.js] Inside Constructor', props);
@@ -89,8 +87,12 @@ class App extends PureComponent {
     });
   };
   
-  loginHandler = () => {
-    this.setState({authenticated: true})
+  toggleAuth = () => {
+    this.setState(prevState => {
+      return {
+        isAuth: !prevState.isAuth
+      }
+    })
   };
   
   render() {
@@ -109,14 +111,13 @@ class App extends PureComponent {
     return (
         /*<WithClass classes={styles.App}>*/
         <>
-          <Cockpit
-            appTitle={this.props.title}
-            personList = {this.state.personList}
-            showPersonList = {this.state.showPersonList}
-            clicked={this.togglePersonListHandler}
-            login={this.loginHandler}
-          />
-          <AuthContext.Provider value={this.state.authenticated}>
+          <AuthContext.Provider value={{isAuth: this.state.isAuth, toggleAuth: this.toggleAuth}}>
+            <Cockpit
+              appTitle={this.props.title}
+              personList = {this.state.personList}
+              showPersonList = {this.state.showPersonList}
+              clicked={this.togglePersonListHandler}
+            />
             {persons}
           </AuthContext.Provider>
           </>
