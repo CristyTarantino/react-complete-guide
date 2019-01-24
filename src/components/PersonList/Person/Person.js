@@ -34,6 +34,7 @@ class Person extends Component {
         <p>{this.props.children}</p>
         <input
           // ref={(input) => { this.inputElement = input }}
+          // https://reactjs.org/docs/refs-and-the-dom.html
           ref={this.inputElement}
           type="text"
           onChange={this.props.changed}

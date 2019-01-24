@@ -24,6 +24,7 @@ class App extends PureComponent {
     console.log('[App.js] Inside Constructor', props);
   }
   
+  // https://reactjs.org/docs/state-and-lifecycle.html
   componentWillMount() {
     console.log('[App.js] Inside componentWillMount');
   }
@@ -138,4 +139,5 @@ class App extends PureComponent {
   }
 }
 
+// https://reactjs.org/docs/higher-order-components.html newWithClass
 export default newWithClass(App, styles.App);
