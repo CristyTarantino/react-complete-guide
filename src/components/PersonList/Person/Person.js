@@ -4,28 +4,27 @@ import PropTypes from 'prop-types';
 import styles from './Person.module.scss';
 
 import WithClass from '../../../hoc/WithClass';
-import AuthContext from '../../../AuthContext';
+import AuthContext from '../../../context/AuthContext';
 
 class Person extends Component {
   static contextType = AuthContext;
-  
+
   constructor(props){
     super(props);
     this.inputElement = React.createRef();
   }
-  
+
   componentDidMount() {
     if (this.props.position === 0) {
-      // this.inputElement.focus();
       this.focusInput();
     }
+    console.log(this.context.isAuth);
   }
-  
+
   focusInput () {
-    // this.inputElement.focus();
     this.inputElement.current.focus();
   }
-  
+
   render() {
     return (
       <WithClass classes={styles.Person}>

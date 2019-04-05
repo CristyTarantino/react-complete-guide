@@ -5,37 +5,52 @@ class PersonList extends PureComponent {
   constructor(props) {
     super(props);
     console.log('[PersonList.js] Inside Constructor', props);
-    this.lastPersonRef = React.createRef();
   }
-  
-  componentWillMount() {
-    console.log('[PersonList.js] Inside componentWillMount');
-  }
-  
+
+  // static getDerivedStateFromProps(props, state) {
+  //   console.log('[Persons.js] getDerivedStateFromProps');
+  //   return state;
+  // }
+
+  // Legacy
+  // componentWillMount() {
+  //   console.log('[PersonList.js] Inside componentWillMount');
+  // }
+
   componentDidMount() {
-    console.log('[PersonList.js] Inside componentDidMount');
-    // if I want to interact with child input
-    // this.lastPersonRef.current.focusInput();
+    console.log('[CREATE PersonList.js] Inside componentDidMount');
   }
-  
-  componentWillReceiveProps(nextProps, nextContext) {
-    console.log('[UPDATE PersonList.js] Inside componentWillReceiveProps', nextProps, nextContext);
-  }
-  
+
+  // Legacy
+  // componentWillReceiveProps(nextProps, nextContext) {
+  //   console.log('[UPDATE PersonList.js] Inside componentWillReceiveProps', nextProps, nextContext);
+  // }
+
   // the one below is if you inherit from Component
   // shouldComponentUpdate(nextProps, nextState, nextContext) {
   //   console.log('[UPDATE PersonList.js] Inside shouldComponentUpdate', nextProps, nextState, nextContext);
   //   return nextProps.personList !== this.props.personList;
   // }
-  
-  componentWillUpdate(nextProps, nextState, nextContext) {
-    console.log('[UPDATE PersonList.js] Inside componentWillUpdate', nextProps, nextState, nextContext);
+
+  // Legacy
+  // componentWillUpdate(nextProps, nextState, nextContext) {
+  //   console.log('[UPDATE PersonList.js] Inside componentWillUpdate', nextProps, nextState, nextContext);
+  // }
+
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    console.log('[UPDATE Persons.js] getSnapshotBeforeUpdate');
+    return { message: 'Snapshot!' };
   }
-  
-  componentDidUpdate() {
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
     console.log('[UPDATE PersonList.js] Inside componentDidUpdate');
+    console.log("snapshot", snapshot);
   }
-  
+
+  componentWillUnmount() {
+    console.log('[Persons.js] componentWillUnmount');
+  }
+
   render() {
     console.log('[PersonList.js] Inside render');
     return this.props.personList.map((person, index) => {
@@ -45,7 +60,6 @@ class PersonList extends PureComponent {
         click={() => this.props.clicked(index)}
         name={person.name}
         age={person.age}
-        ref={this.lastPersonRef}
         changed={(event) => this.props.changed(event, person.id)}
       />
     });
