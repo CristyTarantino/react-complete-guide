@@ -13,7 +13,7 @@ class App extends Component {
       ]
     };
   }
-  
+
   // https://medium.freecodecamp.org/the-best-way-to-bind-event-handlers-in-react-282db2cf1530
   // you could do switchNameHandler() {...} but the you would need to
   // write in the constructor this.switchNameHandler = this.switchNameHandler.bind(this);
@@ -26,7 +26,7 @@ class App extends Component {
       ]
     });
   };
-  
+
   nameChangedHandler = (event) => {
     this.setState({
       person_list: [
@@ -36,7 +36,7 @@ class App extends Component {
       ]
     });
   };
-  
+
   render() {
     const buttonStyle = {
       backgroundColor: 'white',
